@@ -7,13 +7,15 @@
     "authors": [
         {
             "name": "Saad Ahsan",
-            "email": "hello@saadahsan.com"
+            "email": "hamaad@saadahsan.com"
         }
     ],
     "require": {
         "composer/installers": "~1.0 || ~2.0"
     },
     "extra": {
-        "installer-name": "saadahsan/callbackform"
+        "october": {
+            "code": "SaadAhsan.CallbackForm"
+        }
     }
 }
