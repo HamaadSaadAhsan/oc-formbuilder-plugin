@@ -1,0 +1,11 @@
+v1.0.0:
+    - First version of CallbackForm
+    - create_submissions_table.php
+
+v1.1.0:
+    - Added dynamic form builder with custom fields
+    - v1_1_0_create_forms_table.php
+
+v1.1.1:
+    - Fix form_id nullable for repeater
+    - v1_1_1_fix_form_fields_nullable.php

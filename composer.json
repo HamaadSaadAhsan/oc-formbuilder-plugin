@@ -1,0 +1,19 @@
+{
+    "name": "saadahsan/oc-formbuilder-plugin",
+    "type": "october-plugin",
+    "description": "Dynamic form builder with customizable fields, dependent dropdowns, and submission management for OctoberCMS",
+    "keywords": ["october", "cms", "plugin", "form", "form-builder", "dynamic-forms"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Saad Ahsan",
+            "email": "hello@saadahsan.com"
+        }
+    ],
+    "require": {
+        "composer/installers": "~1.0 || ~2.0"
+    },
+    "extra": {
+        "installer-name": "saadahsan/callbackform"
+    }
+}

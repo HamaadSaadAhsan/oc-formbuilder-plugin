@@ -1,0 +1,102 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    form:
+        label: Form
+        type: relation
+        nameFrom: name
+        span: full
+        disabled: true
+
+    _form_data_display:
+        label: Submitted Data
+        type: partial
+        path: $/saadahsan/callbackform/models/submission/_form_data_display.htm
+        span: full
+
+    status:
+        label: Status
+        type: dropdown
+        span: left
+
+    contacted_at:
+        label: Contacted At
+        type: datepicker
+        mode: datetime
+        span: right
+
+    admin_notes:
+        label: Admin Notes
+        type: textarea
+        size: small
+        comment: Internal notes about this submission
+
+secondaryTabs:
+    fields:
+        # Legacy fields (for backwards compatibility)
+        name:
+            label: Name
+            type: text
+            disabled: true
+            span: left
+            tab: Legacy Data
+
+        email:
+            label: Email
+            type: text
+            disabled: true
+            span: right
+            tab: Legacy Data
+
+        phone:
+            label: Phone
+            type: text
+            disabled: true
+            span: left
+            tab: Legacy Data
+
+        preferred_time:
+            label: Preferred Time
+            type: text
+            disabled: true
+            span: right
+            tab: Legacy Data
+
+        message:
+            label: Message
+            type: textarea
+            disabled: true
+            tab: Legacy Data
+
+        # Meta info
+        ip_address:
+            label: IP Address
+            type: text
+            disabled: true
+            span: left
+            tab: Meta
+
+        user_agent:
+            label: User Agent
+            type: text
+            disabled: true
+            span: right
+            tab: Meta
+
+        created_at:
+            label: Created
+            type: datepicker
+            mode: datetime
+            disabled: true
+            span: left
+            tab: Meta
+
+        updated_at:
+            label: Updated
+            type: datepicker
+            mode: datetime
+            disabled: true
+            span: right
+            tab: Meta

@@ -1,0 +1,386 @@
+<style>
+/* Callback Form Base Styles */
+.callback-modal {
+    background: var(--dark, #0a0a0a);
+    border: 1px solid rgba(196, 169, 98, 0.2);
+    border-radius: 0;
+    color: var(--white, #ffffff);
+    max-width: 520px;
+}
+
+.callback-modal .modal-header {
+    padding: 2rem 2rem 0;
+    border: none;
+    position: relative;
+}
+
+.callback-modal .modal-header-content {
+    flex: 1;
+}
+
+.callback-modal .modal-label {
+    display: inline-block;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold, #C4A962);
+    margin-bottom: 0.5rem;
+}
+
+.callback-modal .modal-title {
+    font-family: 'Unna', serif;
+    font-size: 1.75rem;
+    font-weight: 400;
+    color: var(--white, #fff);
+    margin-bottom: 0.5rem;
+}
+
+.callback-modal .modal-subtitle {
+    font-size: 0.9375rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0;
+}
+
+.callback-modal .btn-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    opacity: 1;
+    transition: all 0.3s ease;
+}
+
+.callback-modal .btn-close:hover {
+    border-color: var(--gold, #C4A962);
+}
+
+.callback-modal .btn-close svg {
+    width: 20px;
+    height: 20px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.callback-modal .modal-body {
+    padding: 1.5rem 2rem 2rem;
+}
+
+/* Form styles */
+.callback-form .form-group {
+    margin-bottom: 1.25rem;
+}
+
+.callback-form .form-label {
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 0.5rem;
+}
+
+.callback-form .form-label .required {
+    color: var(--gold, #C4A962);
+}
+
+.callback-form .form-control {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--white, #fff);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    border-radius: 0;
+}
+
+.callback-form .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.callback-form .form-control:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--gold, #C4A962);
+    box-shadow: 0 0 0 3px rgba(196, 169, 98, 0.1);
+}
+
+.callback-form .form-control.error {
+    border-color: #dc3545;
+}
+
+.callback-form .form-error {
+    display: block;
+    color: #dc3545;
+    font-size: 0.8125rem;
+    margin-top: 0.25rem;
+}
+
+.callback-form textarea.form-control {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Checkbox and Radio styles */
+.callback-form .checkbox-group,
+.callback-form .radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.callback-form .checkbox-label,
+.callback-form .radio-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9375rem;
+}
+
+.callback-form .checkbox-label input,
+.callback-form .radio-label input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--gold, #C4A962);
+}
+
+/* Submit button */
+.callback-form .btn-submit {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1.125rem 2rem;
+    background: var(--gold, #C4A962);
+    border: none;
+    color: var(--dark, #0a0a0a);
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    margin-top: 0.5rem;
+}
+
+.callback-form .btn-submit:hover {
+    background: var(--gold-light, #d4be7a);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(196, 169, 98, 0.3);
+}
+
+.callback-form .btn-submit:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.callback-form .btn-arrow svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s ease;
+}
+
+.callback-form .btn-submit:hover .btn-arrow svg {
+    transform: translateX(4px);
+}
+
+.callback-form .btn-loader .spinner {
+    width: 20px;
+    height: 20px;
+}
+
+/* Success message */
+.callback-success {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.callback-success .success-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 1.5rem;
+    background: rgba(196, 169, 98, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.callback-success .success-icon svg {
+    width: 32px;
+    height: 32px;
+    color: var(--gold, #C4A962);
+}
+
+.callback-success h4 {
+    font-family: 'Unna', serif;
+    font-size: 1.5rem;
+    color: var(--white, #fff);
+    margin-bottom: 0.5rem;
+}
+
+.callback-success p {
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+}
+
+/* Phone input styles override */
+.iti {
+    width: 100%;
+}
+
+.iti__country-container {
+    background: var(--dark, #0a0a0a);
+}
+
+/* Select styles */
+.callback-form select.form-control {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23C4A962' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+}
+
+/* File input */
+.callback-form input[type="file"].form-control {
+    padding: 0.5rem;
+}
+
+.callback-form input[type="file"].form-control::file-selector-button {
+    background: var(--gold, #C4A962);
+    color: var(--dark, #0a0a0a);
+    border: none;
+    padding: 0.5rem 1rem;
+    margin-right: 1rem;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+/* intl-tel-input dark theme */
+.callback-form .iti {
+    width: 100%;
+}
+
+.callback-form .iti__country-container {
+    padding: 0;
+}
+
+.callback-form .iti__selected-country {
+    background: rgba(255, 255, 255, 0.05);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0 0.75rem;
+}
+
+.callback-form .iti__selected-country:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.callback-form .iti__dropdown-content {
+    background: var(--dark, #0a0a0a);
+    border: 1px solid rgba(196, 169, 98, 0.3);
+}
+
+.callback-form .iti__search-input {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--white, #fff);
+    padding: 0.5rem;
+}
+
+.callback-form .iti__search-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.callback-form .iti__country-list {
+    background: var(--dark, #0a0a0a);
+}
+
+.callback-form .iti__country {
+    padding: 0.5rem 0.75rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.callback-form .iti__country:hover,
+.callback-form .iti__country--highlight {
+    background: rgba(196, 169, 98, 0.2);
+}
+
+.callback-form .iti__dial-code {
+    color: var(--gold, #C4A962);
+}
+
+/* Tagify dark theme */
+.callback-form .tagify {
+    --tags-border-color: rgba(255, 255, 255, 0.1);
+    --tags-hover-border-color: var(--gold, #C4A962);
+    --tags-focus-border-color: var(--gold, #C4A962);
+    --tag-bg: rgba(196, 169, 98, 0.2);
+    --tag-hover: rgba(196, 169, 98, 0.3);
+    --tag-text-color: var(--white, #fff);
+    --tag-text-color--edit: var(--white, #fff);
+    --tag-remove-bg: rgba(220, 53, 69, 0.3);
+    --tag-remove-btn-color: #fff;
+    --tag-invalid-color: rgba(220, 53, 69, 0.5);
+    --tag-invalid-bg: rgba(220, 53, 69, 0.1);
+    --placeholder-color: rgba(255, 255, 255, 0.4);
+    --placeholder-color-focus: rgba(255, 255, 255, 0.5);
+    --input-color: var(--white, #fff);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.5rem;
+    min-height: 48px;
+}
+
+.callback-form .tagify:focus-within {
+    border-color: var(--gold, #C4A962);
+    box-shadow: 0 0 0 3px rgba(196, 169, 98, 0.1);
+}
+
+.callback-form .tagify__tag {
+    margin: 3px;
+}
+
+.callback-form .tagify__tag > div {
+    padding: 0.25rem 0.5rem;
+}
+
+.callback-form .tagify__tag__removeBtn {
+    margin-left: 0.25rem;
+}
+
+.callback-form .tagify__dropdown {
+    background: var(--dark, #0a0a0a);
+    border: 1px solid rgba(196, 169, 98, 0.3);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.callback-form .tagify__dropdown__wrapper {
+    background: var(--dark, #0a0a0a);
+    border: none;
+}
+
+.callback-form .tagify__dropdown__item {
+    color: rgba(255, 255, 255, 0.8);
+    padding: 0.5rem 0.75rem;
+    margin: 0;
+    border-radius: 0;
+}
+
+.callback-form .tagify__dropdown__item--active,
+.callback-form .tagify__dropdown__item:hover {
+    background: rgba(196, 169, 98, 0.2);
+    color: var(--white, #fff);
+}
+</style>

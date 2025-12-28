@@ -1,0 +1,9 @@
+<input
+    type="file"
+    class="form-control {{ field.field_class }}"
+    id="{{ inputId }}"
+    name="files[]"
+    {% if field.is_required %}required{% endif %}
+    {% if field.field_style %}style="{{ field.field_style }}"{% endif %}
+    {{ field.getAttributesHtml()|raw }}
+>

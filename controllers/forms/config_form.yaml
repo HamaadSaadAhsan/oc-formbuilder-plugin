@@ -1,0 +1,22 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+name: Form
+form: $/saadahsan/callbackform/models/form/fields.yaml
+modelClass: SaadAhsan\CallbackForm\Models\Form
+
+defaultRedirect: saadahsan/callbackform/forms
+
+create:
+    title: Create Form
+    redirect: saadahsan/callbackform/forms/update/:id
+    redirectClose: saadahsan/callbackform/forms
+
+update:
+    title: Edit Form
+    redirect: saadahsan/callbackform/forms
+    redirectClose: saadahsan/callbackform/forms
+
+preview:
+    title: Preview Form

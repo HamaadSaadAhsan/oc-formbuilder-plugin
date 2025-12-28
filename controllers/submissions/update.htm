@@ -1,0 +1,47 @@
+<?php Block::put('breadcrumb') ?>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="<?= Backend::url('saadahsan/callbackform/submissions') ?>">Submissions</a></li>
+        <li class="breadcrumb-item active" aria-current="page"><?= e($formModel->name) ?></li>
+    </ol>
+<?php Block::endPut() ?>
+
+<?= Form::open(['class' => 'layout']) ?>
+
+    <div class="layout-row">
+        <?= $this->formRender() ?>
+    </div>
+
+    <div class="form-buttons">
+        <div class="loading-indicator-container">
+            <button
+                type="submit"
+                data-request="onSave"
+                data-request-data="close:true"
+                data-hotkey="ctrl+s, cmd+s"
+                data-load-indicator="Saving Submission..."
+                class="btn btn-primary">
+                Save
+            </button>
+            <button
+                type="button"
+                data-request="onSave"
+                data-request-data="redirect:0"
+                data-load-indicator="Saving Submission..."
+                class="btn btn-default">
+                Save and Close
+            </button>
+            <button
+                type="button"
+                class="oc-icon-trash btn btn-danger pull-right"
+                data-request="onDelete"
+                data-request-confirm="Are you sure you want to delete this submission?"
+                data-load-indicator="Deleting Submission...">
+                Delete
+            </button>
+            <span class="btn-text">
+                or <a href="<?= Backend::url('saadahsan/callbackform/submissions') ?>">Cancel</a>
+            </span>
+        </div>
+    </div>
+
+<?= Form::close() ?>

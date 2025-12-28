@@ -1,0 +1,25 @@
+# ===================================
+#  List Behavior Config
+# ===================================
+
+title: Forms
+modelClass: SaadAhsan\CallbackForm\Models\Form
+list: $/saadahsan/callbackform/models/form/columns.yaml
+
+recordUrl: saadahsan/callbackform/forms/update/:id
+noRecordsMessage: No forms found
+deleteMessage: Delete selected forms?
+perPage: 20
+
+showSetup: true
+showCheckboxes: true
+showSorting: true
+
+defaultSort:
+    column: created_at
+    direction: desc
+
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: Search forms...

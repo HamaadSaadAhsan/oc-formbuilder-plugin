@@ -1,0 +1,27 @@
+# ===================================
+#  List Behavior Config
+# ===================================
+
+title: Callback Submissions
+modelClass: SaadAhsan\CallbackForm\Models\Submission
+list: $/saadahsan/callbackform/models/submission/columns.yaml
+
+recordUrl: saadahsan/callbackform/submissions/update/:id
+noRecordsMessage: backend::lang.list.no_records
+deleteMessage: backend::lang.list.delete_selected_confirm
+perPage: 20
+
+showSetup: true
+showCheckboxes: true
+showSorting: true
+
+defaultSort:
+    column: created_at
+    direction: desc
+
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: Search submissions...
+
+recordsPerPage: 20

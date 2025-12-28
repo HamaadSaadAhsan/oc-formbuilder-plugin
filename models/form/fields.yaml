@@ -1,0 +1,227 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    name:
+        label: Form Name
+        type: text
+        span: left
+        required: true
+        comment: Internal name for this form
+
+    code:
+        label: Form Code
+        type: text
+        span: right
+        required: true
+        comment: Unique identifier used in component (auto-generated from name if empty)
+        preset:
+            field: name
+            type: slug
+
+    description:
+        label: Description
+        type: textarea
+        size: small
+        span: full
+
+    is_active:
+        label: Active
+        type: switch
+        span: left
+        default: true
+
+tabs:
+    fields:
+        # Fields Tab - Repeater for form fields (stored as JSON)
+        fields_config:
+            label: Form Fields
+            type: repeater
+            prompt: Add Field
+            sortable: true
+            tab: Fields
+            form:
+                fields:
+                    field_type:
+                        label: Field Type
+                        type: dropdown
+                        span: left
+                        required: true
+                        options:
+                            text: Text Input
+                            email: Email
+                            phone: Phone Number
+                            number: Number
+                            url: URL
+                            textarea: Textarea
+                            select: Dropdown Select
+                            checkbox: Checkbox
+                            radio: Radio Buttons
+                            date: Date Picker
+                            file: File Upload
+                            hidden: Hidden Field
+                            html: Custom HTML
+
+                    name:
+                        label: Field Name
+                        type: text
+                        span: right
+                        required: true
+                        comment: Unique identifier (no spaces, use underscores)
+
+                    label:
+                        label: Label
+                        type: text
+                        span: left
+
+                    placeholder:
+                        label: Placeholder
+                        type: text
+                        span: right
+
+                    is_required:
+                        label: Required
+                        type: switch
+                        span: left
+                        default: false
+
+                    is_active:
+                        label: Active
+                        type: switch
+                        span: right
+                        default: true
+
+                    default_value:
+                        label: Default Value
+                        type: text
+                        span: full
+
+                    options:
+                        label: Options (for Select, Radio, Checkbox)
+                        type: repeater
+                        prompt: Add Option
+                        span: full
+                        form:
+                            fields:
+                                value:
+                                    label: Value
+                                    type: text
+                                    span: left
+                                label:
+                                    label: Label
+                                    type: text
+                                    span: right
+
+                    validation_rules:
+                        label: Validation Rules
+                        type: text
+                        span: left
+                        comment: "Laravel validation (e.g., required|email|max:255)"
+
+                    error_message:
+                        label: Custom Error Message
+                        type: text
+                        span: right
+
+                    field_class:
+                        label: CSS Classes
+                        type: text
+                        span: left
+                        comment: Classes for the input element
+
+                    field_style:
+                        label: Inline Styles
+                        type: text
+                        span: right
+                        comment: Inline CSS for the input
+
+                    wrapper_class:
+                        label: Wrapper Classes
+                        type: text
+                        span: left
+                        comment: Classes for the wrapper div
+
+                    wrapper_style:
+                        label: Wrapper Styles
+                        type: text
+                        span: right
+                        comment: Inline CSS for the wrapper
+
+                    custom_attributes:
+                        label: Custom Attributes
+                        type: repeater
+                        prompt: Add Attribute
+                        span: full
+                        form:
+                            fields:
+                                attribute:
+                                    label: Attribute
+                                    type: text
+                                    span: left
+                                    comment: "e.g., data-mask, aria-label"
+                                value:
+                                    label: Value
+                                    type: text
+                                    span: right
+
+                    html_content:
+                        label: HTML Content
+                        type: codeeditor
+                        language: html
+                        span: full
+                        comment: Custom HTML (only for HTML field type)
+
+        # Settings Tab
+        success_message:
+            label: Success Message
+            type: text
+            default: Thank you! Your form has been submitted.
+            tab: Settings
+
+        error_message:
+            label: Error Message
+            type: text
+            default: There was an error. Please try again.
+            tab: Settings
+
+        submit_button_text:
+            label: Submit Button Text
+            type: text
+            default: Submit
+            span: left
+            tab: Settings
+
+        notify_email:
+            label: Notification Email
+            type: text
+            span: right
+            comment: Email address to receive submissions (leave empty to disable)
+            tab: Settings
+
+        # Styling Tab
+        form_class:
+            label: Form CSS Classes
+            type: text
+            span: full
+            tab: Styling
+
+        wrapper_class:
+            label: Wrapper CSS Classes
+            type: text
+            span: full
+            tab: Styling
+
+        custom_css:
+            label: Custom CSS
+            type: codeeditor
+            language: css
+            size: large
+            tab: Styling
+
+        custom_js:
+            label: Custom JavaScript
+            type: codeeditor
+            language: javascript
+            size: large
+            tab: Styling

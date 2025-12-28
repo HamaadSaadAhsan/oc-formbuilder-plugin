@@ -1,0 +1,39 @@
+<?php Block::put('breadcrumb') ?>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="<?= Backend::url('saadahsan/callbackform/forms') ?>">Forms</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Create Form</li>
+    </ol>
+<?php Block::endPut() ?>
+
+<?= Form::open(['class' => 'layout']) ?>
+
+    <div class="layout-row">
+        <?= $this->formRender() ?>
+    </div>
+
+    <div class="form-buttons">
+        <div class="loading-indicator-container">
+            <button
+                type="submit"
+                data-request="onSave"
+                data-request-data="close:true"
+                data-hotkey="ctrl+s, cmd+s"
+                data-load-indicator="Creating Form..."
+                class="btn btn-primary">
+                Create
+            </button>
+            <button
+                type="button"
+                data-request="onSave"
+                data-request-data="redirect:0"
+                data-load-indicator="Creating Form..."
+                class="btn btn-default">
+                Create and Close
+            </button>
+            <span class="btn-text">
+                or <a href="<?= Backend::url('saadahsan/callbackform/forms') ?>">Cancel</a>
+            </span>
+        </div>
+    </div>
+
+<?= Form::close() ?>

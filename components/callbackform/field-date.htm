@@ -1,0 +1,10 @@
+<input
+    type="date"
+    class="form-control {{ field.field_class }}"
+    id="{{ inputId }}"
+    name="{{ field.name }}"
+    {% if field.default_value %}value="{{ field.default_value }}"{% endif %}
+    {% if field.is_required %}required{% endif %}
+    {% if field.field_style %}style="{{ field.field_style }}"{% endif %}
+    {{ field.getAttributesHtml()|raw }}
+>

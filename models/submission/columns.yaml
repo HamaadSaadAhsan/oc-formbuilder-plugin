@@ -1,0 +1,39 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    id:
+        label: ID
+        searchable: true
+        sortable: true
+
+    form:
+        label: Form
+        relation: form
+        valueFrom: name
+        sortable: false
+
+    name:
+        label: Name
+        searchable: true
+        sortable: true
+
+    email:
+        label: Email
+        searchable: true
+        sortable: true
+
+    phone:
+        label: Phone
+        searchable: true
+
+    status:
+        label: Status
+        type: selectable
+        sortable: true
+
+    created_at:
+        label: Created
+        type: timetense
+        sortable: true

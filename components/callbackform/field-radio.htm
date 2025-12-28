@@ -1,0 +1,15 @@
+<div class="radio-group {{ field.field_class }}" {% if field.field_style %}style="{{ field.field_style }}"{% endif %}>
+    {% for option in field.getParsedOptions() %}
+    <label class="radio-label">
+        <input
+            type="radio"
+            name="{{ field.name }}"
+            value="{{ option.value }}"
+            {% if field.default_value == option.value %}checked{% endif %}
+            {% if field.is_required %}required{% endif %}
+            {{ field.getAttributesHtml()|raw }}
+        >
+        <span>{{ option.label ?: option.value }}</span>
+    </label>
+    {% endfor %}
+</div>

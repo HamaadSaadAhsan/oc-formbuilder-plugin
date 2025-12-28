@@ -1,0 +1,22 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+name: Callback Submission
+form: $/saadahsan/callbackform/models/submission/fields.yaml
+modelClass: SaadAhsan\CallbackForm\Models\Submission
+
+defaultRedirect: saadahsan/callbackform/submissions
+
+create:
+    title: New Submission
+    redirect: saadahsan/callbackform/submissions/update/:id
+    redirectClose: saadahsan/callbackform/submissions
+
+update:
+    title: Edit Submission
+    redirect: saadahsan/callbackform/submissions
+    redirectClose: saadahsan/callbackform/submissions
+
+preview:
+    title: View Submission

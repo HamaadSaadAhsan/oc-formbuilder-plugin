@@ -1,0 +1,33 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    name:
+        label: Name
+        searchable: true
+        sortable: true
+
+    code:
+        label: Code
+        searchable: true
+
+    fields_count:
+        label: Fields
+        sortable: false
+        type: text
+
+    submissions_count:
+        label: Submissions
+        sortable: false
+        type: text
+
+    is_active:
+        label: Active
+        type: switch
+        sortable: true
+
+    created_at:
+        label: Created
+        type: timetense
+        sortable: true

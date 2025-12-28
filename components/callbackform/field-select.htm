@@ -1,0 +1,23 @@
+<select
+    class="form-control {{ field.field_class }}"
+    id="{{ inputId }}"
+    name="{{ field.name }}"
+    {% if field.is_required %}required{% endif %}
+    {% if field.field_style %}style="{{ field.field_style }}"{% endif %}
+    {{ field.getAttributesHtml()|raw }}
+>
+    {% set options = field.getParsedOptions() %}
+    {% set firstOption = options|first %}
+    {% if not (firstOption.value is empty) %}
+    <option value="">{{ field.placeholder ?: 'Please select' }}</option>
+    {% endif %}
+    {% for option in options %}
+    <option
+        value="{{ option.value }}"
+        {% if option.group %}data-group="{{ option.group }}"{% endif %}
+        {% if field.default_value == option.value %}selected{% endif %}
+    >
+        {{ option.label ?: option.value }}
+    </option>
+    {% endfor %}
+</select>

@@ -1,0 +1,11 @@
+# ===================================
+#  Relation Behavior Config
+# ===================================
+
+fields:
+    view:
+        list: $/saadahsan/callbackform/models/formfield/columns.yaml
+        toolbarButtons: create|delete
+    manage:
+        form: $/saadahsan/callbackform/models/formfield/fields.yaml
+        list: $/saadahsan/callbackform/models/formfield/columns.yaml

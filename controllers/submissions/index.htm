@@ -1,0 +1,38 @@
+<?php Block::put('breadcrumb') ?>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="<?= Backend::url('saadahsan/callbackform/forms') ?>">Callback Forms</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Submissions</li>
+    </ol>
+<?php Block::endPut() ?>
+
+<div class="control-toolbar">
+    <div class="toolbar-item" style="display: flex; align-items: center; gap: 10px;">
+        <label style="margin: 0; font-weight: 500;">Filter by Form:</label>
+        <select
+            class="form-control custom-select"
+            style="width: auto; min-width: 200px;"
+            onchange="window.location.href = this.value ? '<?= Backend::url('saadahsan/callbackform/submissions') ?>?form=' + this.value : '<?= Backend::url('saadahsan/callbackform/submissions') ?>'">
+            <option value="">All Forms</option>
+            <?php foreach ($forms as $form): ?>
+                <option value="<?= $form->id ?>" <?= $filterForm && $filterForm->id == $form->id ? 'selected' : '' ?>>
+                    <?= e($form->name) ?> (<?= $form->submissions->count() ?>)
+                </option>
+            <?php endforeach ?>
+        </select>
+        <?php if ($filterForm): ?>
+            <a href="<?= Backend::url('saadahsan/callbackform/submissions') ?>" class="btn btn-secondary btn-sm">
+                Clear Filter
+            </a>
+        <?php endif ?>
+    </div>
+</div>
+
+<?php if ($filterForm): ?>
+    <div class="callout callout-info" style="margin-bottom: 20px;">
+        <div class="content">
+            Showing submissions for: <strong><?= e($filterForm->name) ?></strong>
+        </div>
+    </div>
+<?php endif ?>
+
+<?= $this->listRender() ?>

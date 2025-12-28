@@ -1,0 +1,73 @@
+{# Modal wrapper #}
+<div class="modal fade" id="{{ modalId }}" tabindex="-1" aria-labelledby="{{ modalId }}Label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content callback-modal {{ form.wrapper_class }}">
+            <div class="modal-header">
+                <div class="modal-header-content">
+                    <span class="modal-label">Free Consultation</span>
+                    <h5 class="modal-title" id="{{ modalId }}Label">{{ form.name }}</h5>
+                    {% if form.description %}
+                    <p class="modal-subtitle">{{ form.description }}</p>
+                    {% endif %}
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                {# Success message - hidden by default #}
+                <div id="{{ modalId }}Success" style="display: none;" class="callback-success">
+                    <div class="success-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                    </div>
+                    <h4>Thank You!</h4>
+                    <p>{{ form.success_message }}</p>
+                </div>
+
+                {% partial __SELF__ ~ '::form' %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+(function() {
+    var modalId = '{{ modalId }}';
+
+    function handleFormSuccess(data) {
+        if (data.success) {
+            document.getElementById(modalId + 'Form').style.display = 'none';
+            document.getElementById(modalId + 'Success').style.display = 'block';
+
+            document.getElementById(modalId + 'Form').reset();
+
+            setTimeout(function() {
+                var modalEl = document.getElementById(modalId);
+                var modal = bootstrap.Modal.getInstance(modalEl);
+                if (modal) {
+                    modal.hide();
+                }
+                setTimeout(function() {
+                    document.getElementById(modalId + 'Form').style.display = 'block';
+                    document.getElementById(modalId + 'Success').style.display = 'none';
+                }, 500);
+            }, 3000);
+        }
+    }
+
+    window['handleFormSuccess_' + modalId] = handleFormSuccess;
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var modalEl = document.getElementById(modalId);
+        if (modalEl) {
+            modalEl.addEventListener('shown.bs.modal', function () {
+                document.dispatchEvent(new CustomEvent('form-modal-opened', { detail: { modalId: modalId, formCode: '{{ form.code }}' } }));
+            });
+        }
+    });
+})();
+</script>

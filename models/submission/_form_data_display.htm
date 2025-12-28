@@ -1,0 +1,36 @@
+<?php
+$formData = $model->getFormDataDisplay();
+?>
+
+<?php if (!empty($formData)): ?>
+    <div class="form-data-display" style="background: #f9f9f9; border: 1px solid #ddd; border-radius: 4px; padding: 15px;">
+        <table class="table table-striped" style="margin: 0;">
+            <thead>
+                <tr>
+                    <th style="width: 30%;">Field</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($formData as $field): ?>
+                    <tr>
+                        <td><strong><?= e($field['label']) ?></strong></td>
+                        <td>
+                            <?php if ($field['type'] === 'file'): ?>
+                                <em>File attachment</em>
+                            <?php else: ?>
+                                <?= e($field['value']) ?>
+                            <?php endif ?>
+                        </td>
+                    </tr>
+                <?php endforeach ?>
+            </tbody>
+        </table>
+    </div>
+<?php else: ?>
+    <div class="callout callout-warning">
+        <div class="content">
+            <p>No form data available. This may be a legacy submission.</p>
+        </div>
+    </div>
+<?php endif ?>

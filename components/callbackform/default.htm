@@ -1,0 +1,259 @@
+{% if form %}
+    {# Base styles #}
+    {% partial __SELF__ ~ '::styles' %}
+
+    {% if renderMode == 'modal' %}
+        {% partial __SELF__ ~ '::modal' %}
+    {% else %}
+        {% partial __SELF__ ~ '::form' %}
+    {% endif %}
+
+    {# Inject custom CSS #}
+    {% if form.custom_css %}
+    <style data-form-styles="{{ form.code }}">
+        {{ form.custom_css|raw }}
+    </style>
+    {% endif %}
+
+    {# Inject custom JS #}
+    {% if form.custom_js %}
+    <script data-form-scripts="{{ form.code }}">
+        {{ form.custom_js|raw }}
+    </script>
+    {% endif %}
+
+    {# Custom field initialization script #}
+    <script data-form-init="{{ form.code }}">
+    (function() {
+        var formCode = '{{ form.code }}';
+        var modalId = '{{ modalId }}';
+        var initialized = {};
+
+        // Load intl-tel-input library
+        function loadIntlTelInput(callback) {
+            // Load CSS
+            if (!document.querySelector('link[data-intl-tel-input-css]')) {
+                var link = document.createElement('link');
+                link.rel = 'stylesheet';
+                link.href = 'https://cdn.jsdelivr.net/npm/intl-tel-input@25.11.2/build/css/intlTelInput.css';
+                link.setAttribute('data-intl-tel-input-css', '1');
+                document.head.appendChild(link);
+            }
+
+            if (window.intlTelInput) {
+                callback(window.intlTelInput);
+                return;
+            }
+
+            var script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/intl-tel-input@25.11.2/build/js/intlTelInput.min.js';
+            script.onload = function() { callback(window.intlTelInput); };
+            document.head.appendChild(script);
+        }
+
+        // Load Tagify library
+        function loadTagify(callback) {
+            // Load CSS
+            if (!document.querySelector('link[data-tagify-css]')) {
+                var link = document.createElement('link');
+                link.rel = 'stylesheet';
+                link.href = 'https://cdn.jsdelivr.net/npm/@yaireo/tagify@4.31.3/dist/tagify.css';
+                link.setAttribute('data-tagify-css', '1');
+                document.head.appendChild(link);
+            }
+
+            if (window.Tagify) {
+                callback(window.Tagify);
+                return;
+            }
+
+            var script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/@yaireo/tagify@4.31.3/dist/tagify.min.js';
+            script.onload = function() { callback(window.Tagify); };
+            document.head.appendChild(script);
+        }
+
+        function initCustomFields(container) {
+            if (!container) return;
+
+            // Initialize intl-tel-input
+            var phoneInputs = container.querySelectorAll('[data-intl-tel-input]');
+            if (phoneInputs.length > 0) {
+                loadIntlTelInput(function(intlTelInput) {
+                    phoneInputs.forEach(function(input) {
+                        if (initialized[input.id + '_iti']) return;
+                        var iti = intlTelInput(input, {
+                            initialCountry: 'auto',
+                            geoIpLookup: function(callback) {
+                                fetch('https://ipapi.co/json')
+                                    .then(function(res) { return res.json(); })
+                                    .then(function(data) { callback(data.country_code); })
+                                    .catch(function() { callback('pk'); });
+                            },
+                            loadUtils: function() {
+                                return import('https://cdn.jsdelivr.net/npm/intl-tel-input@25.11.2/build/js/utils.js');
+                            },
+                            separateDialCode: true,
+                            formatOnDisplay: true
+                        });
+                        initialized[input.id + '_iti'] = iti;
+
+                        // Store full number on form submit
+                        var form = input.closest('form');
+                        if (form && !form._itiHandlerAttached) {
+                            form.addEventListener('ajax:before-request', function() {
+                                phoneInputs.forEach(function(phoneInput) {
+                                    var itiInstance = initialized[phoneInput.id + '_iti'];
+                                    if (itiInstance) {
+                                        phoneInput.value = itiInstance.getNumber();
+                                    }
+                                });
+                            });
+                            form._itiHandlerAttached = true;
+                        }
+                    });
+                });
+            }
+
+            // Initialize Tagify
+            var tagifyInputs = container.querySelectorAll('[data-tagify]');
+            if (tagifyInputs.length > 0) {
+                loadTagify(function(Tagify) {
+                    tagifyInputs.forEach(function(input) {
+                        if (initialized[input.id + '_tagify']) return;
+                        var whitelist = input.getAttribute('data-tagify-whitelist');
+                        var options = {
+                            enforceWhitelist: !!whitelist,
+                            maxTags: 5,
+                            editTags: false,
+                            dropdown: {
+                                maxItems: 10,
+                                enabled: 0,
+                                closeOnSelect: true
+                            }
+                        };
+                        if (whitelist) {
+                            options.whitelist = whitelist.split(',').map(function(s) { return s.trim(); });
+                        }
+                        var tagify = new Tagify(input, options);
+                        initialized[input.id + '_tagify'] = tagify;
+                    });
+                });
+            }
+        }
+
+        // Initialize dependent dropdowns
+        function initDependentDropdowns(container) {
+            if (!container) return;
+
+            var dependentSelects = container.querySelectorAll('select[data-depends-on]');
+            dependentSelects.forEach(function(dependentSelect) {
+                var parentName = dependentSelect.getAttribute('data-depends-on');
+                var parentSelect = container.querySelector('select[name="' + parentName + '"]');
+
+                if (!parentSelect) return;
+
+                // Store all options with their groups
+                var allOptions = [];
+                dependentSelect.querySelectorAll('option[data-group]').forEach(function(opt) {
+                    allOptions.push({
+                        value: opt.value,
+                        label: opt.textContent,
+                        group: opt.getAttribute('data-group')
+                    });
+                });
+
+                // Store the placeholder option
+                var placeholderOption = dependentSelect.querySelector('option:not([data-group])');
+                var placeholderText = placeholderOption ? placeholderOption.textContent : 'Please select';
+
+                // Function to filter options
+                function filterOptions() {
+                    var selectedValue = parentSelect.value.toLowerCase();
+                    var formGroup = dependentSelect.closest('.form-group');
+                    var label = formGroup ? formGroup.querySelector('.form-label') : null;
+
+                    // Clear current options
+                    dependentSelect.innerHTML = '';
+
+                    // Add placeholder
+                    var placeholder = document.createElement('option');
+                    placeholder.value = '';
+                    placeholder.textContent = placeholderText;
+                    dependentSelect.appendChild(placeholder);
+
+                    if (!selectedValue || selectedValue === 'general') {
+                        dependentSelect.disabled = true;
+                        dependentSelect.required = false;
+                        if (formGroup) formGroup.style.display = selectedValue === 'general' ? 'none' : '';
+                        // Remove required indicator
+                        if (label) {
+                            var reqSpan = label.querySelector('.required');
+                            if (reqSpan) reqSpan.style.display = 'none';
+                        }
+                        return;
+                    }
+
+                    // Show the field
+                    if (formGroup) formGroup.style.display = '';
+                    dependentSelect.disabled = false;
+
+                    // Check if there are matching options
+                    var hasOptions = false;
+                    allOptions.forEach(function(opt) {
+                        if (opt.group === selectedValue) {
+                            hasOptions = true;
+                            var option = document.createElement('option');
+                            option.value = opt.value;
+                            option.textContent = opt.label;
+                            dependentSelect.appendChild(option);
+                        }
+                    });
+
+                    // Make required if has options
+                    dependentSelect.required = hasOptions;
+                    if (label) {
+                        var reqSpan = label.querySelector('.required');
+                        if (reqSpan) {
+                            reqSpan.style.display = hasOptions ? '' : 'none';
+                        } else if (hasOptions) {
+                            var span = document.createElement('span');
+                            span.className = 'required';
+                            span.textContent = '*';
+                            label.appendChild(span);
+                        }
+                    }
+                }
+
+                // Initialize
+                filterOptions();
+
+                // Listen for changes
+                parentSelect.addEventListener('change', filterOptions);
+            });
+        }
+
+        // Initialize on modal open
+        document.addEventListener('form-modal-opened', function(e) {
+            if (e.detail && e.detail.formCode === formCode) {
+                var container = document.getElementById(modalId);
+                setTimeout(function() {
+                    initCustomFields(container);
+                    initDependentDropdowns(container);
+                }, 100);
+            }
+        });
+
+        // Also initialize on DOMContentLoaded for inline forms
+        document.addEventListener('DOMContentLoaded', function() {
+            var container = document.getElementById(modalId + 'Form');
+            if (container && container.closest('.callback-modal') === null) {
+                initCustomFields(container.parentElement);
+                initDependentDropdowns(container.parentElement);
+            }
+        });
+    })();
+    </script>
+{% else %}
+    <!-- Form not found or inactive -->
+{% endif %}

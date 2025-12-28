@@ -1,0 +1,30 @@
+{% set options = field.getParsedOptions() %}
+
+{% if options|length > 0 %}
+    {# Multiple checkboxes #}
+    <div class="checkbox-group {{ field.field_class }}" {% if field.field_style %}style="{{ field.field_style }}"{% endif %}>
+        {% for option in options %}
+        <label class="checkbox-label">
+            <input
+                type="checkbox"
+                name="{{ field.name }}[]"
+                value="{{ option.value }}"
+                {{ field.getAttributesHtml()|raw }}
+            >
+            <span>{{ option.label ?: option.value }}</span>
+        </label>
+        {% endfor %}
+    </div>
+{% else %}
+    {# Single checkbox #}
+    <label class="checkbox-label {{ field.field_class }}" {% if field.field_style %}style="{{ field.field_style }}"{% endif %}>
+        <input
+            type="checkbox"
+            name="{{ field.name }}"
+            value="1"
+            {% if field.is_required %}required{% endif %}
+            {{ field.getAttributesHtml()|raw }}
+        >
+        <span>{{ field.placeholder ?: field.label }}</span>
+    </label>
+{% endif %}

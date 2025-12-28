@@ -1,0 +1,15 @@
+{# Field wrapper with label and error display #}
+{% set inputId = 'field_' ~ field.id ~ '_' ~ field.name %}
+
+<div class="form-group {{ field.wrapper_class }}" {% if field.wrapper_style %}style="{{ field.wrapper_style }}"{% endif %}>
+    {% if field.label and field.field_type != 'hidden' and field.field_type != 'html' %}
+    <label for="{{ inputId }}" class="form-label">
+        {{ field.label }}
+        {% if field.is_required %}<span class="required">*</span>{% endif %}
+    </label>
+    {% endif %}
+
+    {% partial __SELF__ ~ '::field-' ~ field.field_type field=field inputId=inputId %}
+
+    <span data-validate-for="{{ field.name }}" class="form-error"></span>
+</div>

@@ -1,0 +1,11 @@
+<input
+    type="url"
+    class="form-control {{ field.field_class }}"
+    id="{{ inputId }}"
+    name="{{ field.name }}"
+    {% if field.placeholder %}placeholder="{{ field.placeholder }}"{% endif %}
+    {% if field.default_value %}value="{{ field.default_value }}"{% endif %}
+    {% if field.is_required %}required{% endif %}
+    {% if field.field_style %}style="{{ field.field_style }}"{% endif %}
+    {{ field.getAttributesHtml()|raw }}
+>
