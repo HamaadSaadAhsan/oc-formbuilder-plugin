@@ -4,9 +4,9 @@
 
 title: Forms
 modelClass: SaadAhsan\CallbackForm\Models\Form
-list: $/saadahsan/callbackform/models/form/columns.yaml
+list: $/saadahsan/formbuilder/models/form/columns.yaml
 
-recordUrl: saadahsan/callbackform/forms/update/:id
+recordUrl: saadahsan/formbuilder/forms/update/:id
 noRecordsMessage: No forms found
 deleteMessage: Delete selected forms?
 perPage: 20

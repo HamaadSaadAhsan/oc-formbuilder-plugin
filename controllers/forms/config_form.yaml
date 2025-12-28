@@ -3,20 +3,20 @@
 # ===================================
 
 name: Form
-form: $/saadahsan/callbackform/models/form/fields.yaml
+form: $/saadahsan/formbuilder/models/form/fields.yaml
 modelClass: SaadAhsan\CallbackForm\Models\Form
 
-defaultRedirect: saadahsan/callbackform/forms
+defaultRedirect: saadahsan/formbuilder/forms
 
 create:
     title: Create Form
-    redirect: saadahsan/callbackform/forms/update/:id
-    redirectClose: saadahsan/callbackform/forms
+    redirect: saadahsan/formbuilder/forms/update/:id
+    redirectClose: saadahsan/formbuilder/forms
 
 update:
     title: Edit Form
-    redirect: saadahsan/callbackform/forms
-    redirectClose: saadahsan/callbackform/forms
+    redirect: saadahsan/formbuilder/forms
+    redirectClose: saadahsan/formbuilder/forms
 
 preview:
     title: Preview Form

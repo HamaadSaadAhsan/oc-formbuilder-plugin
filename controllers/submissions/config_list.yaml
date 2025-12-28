@@ -4,9 +4,9 @@
 
 title: Callback Submissions
 modelClass: SaadAhsan\CallbackForm\Models\Submission
-list: $/saadahsan/callbackform/models/submission/columns.yaml
+list: $/saadahsan/formbuilder/models/submission/columns.yaml
 
-recordUrl: saadahsan/callbackform/submissions/update/:id
+recordUrl: saadahsan/formbuilder/submissions/update/:id
 noRecordsMessage: backend::lang.list.no_records
 deleteMessage: backend::lang.list.delete_selected_confirm
 perPage: 20

@@ -1,18 +1,18 @@
 <?php
 
-namespace SaadAhsan\CallbackForm\Components;
+namespace SaadAhsan\FormBuilder\Components;
 
 use Cms\Classes\ComponentBase;
-use SaadAhsan\CallbackForm\Models\Form;
-use SaadAhsan\CallbackForm\Models\Submission;
+use SaadAhsan\FormBuilder\Models\Form;
+use SaadAhsan\FormBuilder\Models\Submission;
 use October\Rain\Exception\ValidationException;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
 
 /**
- * CallbackForm Component - Renders dynamic forms
+ * FormBuilder Component - Renders dynamic forms
  */
-class CallbackForm extends ComponentBase
+class FormBuilder extends ComponentBase
 {
     /**
      * @var Form The form model
@@ -25,7 +25,7 @@ class CallbackForm extends ComponentBase
     public function componentDetails(): array
     {
         return [
-            'name'        => 'Callback Form',
+            'name'        => 'Form Builder',
             'description' => 'Displays a dynamic form based on backend configuration'
         ];
     }
@@ -235,6 +235,6 @@ class CallbackForm extends ComponentBase
      */
     protected function getPartialPath(string $partial): string
     {
-        return plugins_path('saadahsan/callbackform/components/callbackform/' . $partial . '.htm');
+        return plugins_path('saadahsan/formbuilder/components/callbackform/' . $partial . '.htm');
     }
 }

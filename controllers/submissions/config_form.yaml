@@ -3,20 +3,20 @@
 # ===================================
 
 name: Callback Submission
-form: $/saadahsan/callbackform/models/submission/fields.yaml
+form: $/saadahsan/formbuilder/models/submission/fields.yaml
 modelClass: SaadAhsan\CallbackForm\Models\Submission
 
-defaultRedirect: saadahsan/callbackform/submissions
+defaultRedirect: saadahsan/formbuilder/submissions
 
 create:
     title: New Submission
-    redirect: saadahsan/callbackform/submissions/update/:id
-    redirectClose: saadahsan/callbackform/submissions
+    redirect: saadahsan/formbuilder/submissions/update/:id
+    redirectClose: saadahsan/formbuilder/submissions
 
 update:
     title: Edit Submission
-    redirect: saadahsan/callbackform/submissions
-    redirectClose: saadahsan/callbackform/submissions
+    redirect: saadahsan/formbuilder/submissions
+    redirectClose: saadahsan/formbuilder/submissions
 
 preview:
     title: View Submission

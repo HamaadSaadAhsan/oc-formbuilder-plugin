@@ -1,12 +1,12 @@
 <?php
 
-namespace SaadAhsan\CallbackForm;
+namespace SaadAhsan\FormBuilder;
 
 use Backend;
 use System\Classes\PluginBase;
 
 /**
- * CallbackForm Plugin - Dynamic Form Builder
+ * FormBuilder Plugin - Dynamic Form Builder
  */
 class Plugin extends PluginBase
 {
@@ -16,10 +16,10 @@ class Plugin extends PluginBase
     public function pluginDetails(): array
     {
         return [
-            'name'        => 'Callback Form Builder',
+            'name'        => 'Form Builder',
             'description' => 'Dynamic form builder with customizable fields and submission management',
             'author'      => 'Saad Ahsan',
-            'icon'        => 'icon-wpforms'
+            'icon'        => 'icon-file-text-o'
         ];
     }
 
@@ -45,7 +45,7 @@ class Plugin extends PluginBase
     public function registerComponents(): array
     {
         return [
-            \SaadAhsan\CallbackForm\Components\CallbackForm::class => 'callBackForm',
+            \SaadAhsan\FormBuilder\Components\FormBuilder::class => 'formBuilder',
         ];
     }
 
@@ -55,12 +55,12 @@ class Plugin extends PluginBase
     public function registerPermissions(): array
     {
         return [
-            'saadahsan.callbackform.manage_forms' => [
-                'tab'   => 'Callback Forms',
+            'saadahsan.formbuilder.manage_forms' => [
+                'tab'   => 'Form Builder',
                 'label' => 'Manage forms'
             ],
-            'saadahsan.callbackform.manage_submissions' => [
-                'tab'   => 'Callback Forms',
+            'saadahsan.formbuilder.manage_submissions' => [
+                'tab'   => 'Form Builder',
                 'label' => 'Manage submissions'
             ],
         ];
@@ -72,25 +72,25 @@ class Plugin extends PluginBase
     public function registerNavigation(): array
     {
         return [
-            'callbackform' => [
+            'formbuilder' => [
                 'label'       => 'Forms',
-                'url'         => Backend::url('saadahsan/callbackform/forms'),
+                'url'         => Backend::url('saadahsan/formbuilder/forms'),
                 'icon'        => 'icon-file-text-o',
-                'permissions' => ['saadahsan.callbackform.*'],
+                'permissions' => ['saadahsan.formbuilder.*'],
                 'order'       => 500,
 
                 'sideMenu' => [
                     'forms' => [
                         'label'       => 'Forms',
                         'icon'        => 'icon-list-alt',
-                        'url'         => Backend::url('saadahsan/callbackform/forms'),
-                        'permissions' => ['saadahsan.callbackform.manage_forms'],
+                        'url'         => Backend::url('saadahsan/formbuilder/forms'),
+                        'permissions' => ['saadahsan.formbuilder.manage_forms'],
                     ],
                     'submissions' => [
                         'label'       => 'Submissions',
                         'icon'        => 'icon-inbox',
-                        'url'         => Backend::url('saadahsan/callbackform/submissions'),
-                        'permissions' => ['saadahsan.callbackform.manage_submissions'],
+                        'url'         => Backend::url('saadahsan/formbuilder/submissions'),
+                        'permissions' => ['saadahsan.formbuilder.manage_submissions'],
                     ],
                 ],
             ],

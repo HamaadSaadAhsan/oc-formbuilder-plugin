@@ -1,6 +1,6 @@
 <?php
 
-namespace SaadAhsan\CallbackForm\Models;
+namespace SaadAhsan\FormBuilder\Models;
 
 use Model;
 

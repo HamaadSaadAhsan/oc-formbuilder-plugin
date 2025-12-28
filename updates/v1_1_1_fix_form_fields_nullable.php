@@ -1,6 +1,6 @@
 <?php
 
-namespace SaadAhsan\CallbackForm\Updates;
+namespace SaadAhsan\FormBuilder\Updates;
 
 use Schema;
 use October\Rain\Database\Schema\Blueprint;

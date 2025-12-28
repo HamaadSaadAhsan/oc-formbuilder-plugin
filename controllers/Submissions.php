@@ -1,11 +1,11 @@
 <?php
 
-namespace SaadAhsan\CallbackForm\Controllers;
+namespace SaadAhsan\FormBuilder\Controllers;
 
 use BackendMenu;
 use Backend\Classes\Controller;
-use SaadAhsan\CallbackForm\Models\Form;
-use SaadAhsan\CallbackForm\Models\Submission;
+use SaadAhsan\FormBuilder\Models\Form;
+use SaadAhsan\FormBuilder\Models\Submission;
 
 /**
  * Submissions Backend Controller
@@ -33,7 +33,7 @@ class Submissions extends Controller
     /**
      * @var array Required permissions
      */
-    public $requiredPermissions = ['saadahsan.callbackform.manage_submissions'];
+    public $requiredPermissions = ['saadahsan.formbuilder.manage_submissions'];
 
     /**
      * @var Form|null Current form filter
@@ -47,7 +47,7 @@ class Submissions extends Controller
     {
         parent::__construct();
 
-        BackendMenu::setContext('SaadAhsan.CallbackForm', 'callbackform', 'submissions');
+        BackendMenu::setContext('SaadAhsan.FormBuilder', 'callbackform', 'submissions');
 
         // Check for form filter
         $formId = get('form');
@@ -126,9 +126,9 @@ class Submissions extends Controller
         $formId = post('form_id');
 
         if ($formId) {
-            return \Redirect::to(Backend::url('saadahsan/callbackform/submissions') . '?form=' . $formId);
+            return \Redirect::to(Backend::url('saadahsan/formbuilder/submissions') . '?form=' . $formId);
         }
 
-        return \Redirect::to(Backend::url('saadahsan/callbackform/submissions'));
+        return \Redirect::to(Backend::url('saadahsan/formbuilder/submissions'));
     }
 }

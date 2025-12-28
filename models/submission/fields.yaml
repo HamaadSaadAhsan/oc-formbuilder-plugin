@@ -13,7 +13,7 @@ fields:
     _form_data_display:
         label: Submitted Data
         type: partial
-        path: $/saadahsan/callbackform/models/submission/_form_data_display.htm
+        path: $/saadahsan/formbuilder/models/submission/_form_data_display.htm
         span: full
 
     status:

@@ -1,10 +1,10 @@
 <?php
 
-namespace SaadAhsan\CallbackForm\Controllers;
+namespace SaadAhsan\FormBuilder\Controllers;
 
 use BackendMenu;
 use Backend\Classes\Controller;
-use SaadAhsan\CallbackForm\Models\Form;
+use SaadAhsan\FormBuilder\Models\Form;
 
 /**
  * Forms Backend Controller
@@ -32,7 +32,7 @@ class Forms extends Controller
     /**
      * @var array Required permissions
      */
-    public $requiredPermissions = ['saadahsan.callbackform.manage_forms'];
+    public $requiredPermissions = ['saadahsan.formbuilder.manage_forms'];
 
     /**
      * __construct the controller
@@ -41,7 +41,7 @@ class Forms extends Controller
     {
         parent::__construct();
 
-        BackendMenu::setContext('SaadAhsan.CallbackForm', 'callbackform', 'forms');
+        BackendMenu::setContext('SaadAhsan.FormBuilder', 'callbackform', 'forms');
     }
 
     /**

@@ -1,5 +1,5 @@
 {
-    "name": "saadahsan/oc-callbackform-plugin",
+    "name": "saadahsan/oc-formbuilder-plugin",
     "type": "october-plugin",
     "description": "Dynamic form builder with customizable fields, dependent dropdowns, and submission management for OctoberCMS",
     "keywords": ["october", "cms", "plugin", "form", "form-builder", "dynamic-forms"],
@@ -15,7 +15,7 @@
     },
     "extra": {
         "october": {
-            "code": "SaadAhsan.CallbackForm"
+            "code": "SaadAhsan.FormBuilder"
         }
     }
 }

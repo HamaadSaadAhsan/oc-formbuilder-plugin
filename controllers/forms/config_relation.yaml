@@ -4,8 +4,8 @@
 
 fields:
     view:
-        list: $/saadahsan/callbackform/models/formfield/columns.yaml
+        list: $/saadahsan/formbuilder/models/formfield/columns.yaml
         toolbarButtons: create|delete
     manage:
-        form: $/saadahsan/callbackform/models/formfield/fields.yaml
-        list: $/saadahsan/callbackform/models/formfield/columns.yaml
+        form: $/saadahsan/formbuilder/models/formfield/fields.yaml
+        list: $/saadahsan/formbuilder/models/formfield/columns.yaml
